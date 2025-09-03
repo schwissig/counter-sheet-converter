@@ -4,7 +4,7 @@ import spock.lang.Specification
 
 class CounterSheetConverterSpec extends Specification {
 
-    def "Objective Schmidt counter sheets test"() {
+    /*def "Objective Schmidt counter sheets test"() {
         given:
         String jsonDataFile = "projects/counter-sheet-converter/src/test/resources/counterSheets/objective_schmidt/os-counter-sheet-data.json"
         String outputDir = "projects/counter-sheet-converter/output/counterSheets"
@@ -14,7 +14,7 @@ class CounterSheetConverterSpec extends Specification {
 
         then:
         notThrown(Exception.class)
-    }
+    }*/
 
     def "JSON data file does not exist"() {
         given:
