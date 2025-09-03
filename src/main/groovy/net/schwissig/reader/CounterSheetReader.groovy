@@ -6,10 +6,7 @@ import net.schwissig.model.CounterSection
 import net.schwissig.model.CounterSheet
 import net.schwissig.model.CounterSheetData
 
-import java.awt.*
-import java.awt.geom.RoundRectangle2D
 import java.awt.image.BufferedImage
-import java.util.List
 
 class CounterSheetReader {
 
