@@ -6,8 +6,6 @@ class CounterSheet {
 
     int dpi
 
-    double cornerRounding
-
     String frontImageFile, backImageFile
 
     List<CounterSection> counterSections

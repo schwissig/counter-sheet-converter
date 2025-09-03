@@ -53,7 +53,7 @@ class CounterSheetReader {
 
                     for (int counterIndex = 0; counterIndex < totalCounters; counterIndex++) {
                         int column = counterIndex % counterSection.getColumns()
-                        int row = counterIndex / counterSection.getColumns()
+                        int row = (int) (counterIndex / counterSection.getColumns())
 
                         Counter counter = new Counter()
 
@@ -68,12 +68,7 @@ class CounterSheetReader {
                                 "_Section" + (sectionIndex + 1) +
                                 "_Counter" + (counterIndex + 1))
 
-                        if (counterSheet.getCornerRounding() != 0.0) {
-                            int cornerRoundingPixels = (int) (dpi * counterSheet.getCornerRounding())
-                            counter.setFrontImage(makeRoundedCorner(counterFrontImage, cornerRoundingPixels))
-                        } else {
-                            counter.setFrontImage(counterFrontImage)
-                        }
+                        counter.setFrontImage(counterFrontImage)
 
                         counters.add(counter)
                     }
@@ -137,32 +132,5 @@ class CounterSheetReader {
         }
 
         return counters
-    }
-
-    static BufferedImage makeRoundedCorner(BufferedImage image, int cornerRadius) {
-        int w = image.getWidth()
-        int h = image.getHeight()
-        BufferedImage output = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB)
-
-        Graphics2D g2 = output.createGraphics()
-
-        // This is what we want, but it only does hard-clipping, i.e. aliasing
-        // g2.setClip(new RoundRectangle2D ...)
-
-        // so instead fake soft-clipping by first drawing the desired clip shape
-        // in fully opaque white with antialiasing enabled...
-        g2.setComposite(AlphaComposite.Src)
-        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON)
-        g2.setColor(Color.WHITE)
-        g2.fill(new RoundRectangle2D.Float(0, 0, w, h, cornerRadius, cornerRadius))
-
-        // ... then compositing the image on top,
-        // using the white shape from above as alpha source
-        g2.setComposite(AlphaComposite.SrcAtop)
-        g2.drawImage(image, 0, 0, null)
-
-        g2.dispose()
-
-        return output
     }
 }
