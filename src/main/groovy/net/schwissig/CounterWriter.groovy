@@ -17,7 +17,7 @@ class CounterWriter {
 
     void write() {
         for (Counter counter : counters) {
-            File frontImage = new File(outputPath + counter.getName() + "_front.png")
+            File frontImage = new File(outputPath, counter.getName() + "_front.png")
             try {
                 ImageIO.write(counter.getFrontImage(), "png", frontImage)
             } catch (IOException e) {

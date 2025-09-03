@@ -7,6 +7,7 @@ class Main {
             println "Error: Not enough arguments."
             println "Usage:"
             println "   java -jar counter-sheet-converter.jar <counter-sheet-data.json> <output-directory>"
+            return
         }
 
         try {

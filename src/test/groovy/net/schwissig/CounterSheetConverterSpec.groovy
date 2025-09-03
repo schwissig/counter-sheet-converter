@@ -6,8 +6,10 @@ class CounterSheetConverterSpec extends Specification {
 
     /*def "Objective Schmidt counter sheets test"() {
         given:
-        String jsonDataFile = "projects/counter-sheet-converter/src/test/resources/counterSheets/objective_schmidt/os-counter-sheet-data.json"
-        String outputDir = "projects/counter-sheet-converter/output/counterSheets"
+        String userHome = System.getProperty("user.home")
+
+        String jsonDataFile = userHome + "/projects/counter-sheet-converter/src/test/resources/counterSheets/objective_schmidt/os-counter-sheet-data.json"
+        String outputDir = userHome + "/projects/counter-sheet-converter/output/counterSheets"
 
         when:
         CounterSheetConverter.convert(jsonDataFile, outputDir)
@@ -18,8 +20,10 @@ class CounterSheetConverterSpec extends Specification {
 
     def "JSON data file does not exist"() {
         given:
-        String jsonDataFile = "asdf.json"
-        String outputDir = "projects/counter-sheet-converter/output/counterSheets"
+        String userHome = System.getProperty("user.home")
+
+        String jsonDataFile = userHome + "/asdf.json"
+        String outputDir = userHome + "/projects/counter-sheet-converter/output/counterSheets"
 
         when:
         CounterSheetConverter.convert(jsonDataFile, outputDir)
