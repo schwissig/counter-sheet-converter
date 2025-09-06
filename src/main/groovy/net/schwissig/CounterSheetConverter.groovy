@@ -34,6 +34,8 @@ class CounterSheetConverter {
                 }
             }
 
+
+
             // Write counters to files.
             new CounterWriter(counterOutputPath, counters).write()
         }

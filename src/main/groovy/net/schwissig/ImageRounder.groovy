@@ -13,14 +13,14 @@ class ImageRounder {
      * Round a given corner of an image
      *
      * @param pixelsToRound Pixels to round corners.
-     * @param counterImage Image to round corner of.
+     * @param image Image to round corner of.
      * @return Image with corners potentially rounded, based on inputs.
      */
-    static BufferedImage process(int pixelsToRound, BufferedImage counterImage) {
+    static BufferedImage process(int pixelsToRound, BufferedImage image) {
         if (pixelsToRound > 0) {
-            return makeRoundedCorner(counterImage, pixelsToRound)
+            return makeRoundedCorner(image, pixelsToRound)
         } else {
-            return counterImage
+            return image
         }
     }
 
