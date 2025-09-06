@@ -4,6 +4,8 @@ class CounterSheet {
 
     String name
 
+    double width
+
     int dpi
 
     String frontImageFile, backImageFile

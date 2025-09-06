@@ -1,4 +1,4 @@
-package net.schwissig
+package net.schwissig.processing
 
 import java.awt.Color
 import java.awt.Graphics2D

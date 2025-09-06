@@ -32,98 +32,66 @@ class CounterSheetReader {
         int counterSheetIndex = 1
         for (CounterSheet counterSheet : counterSheetData.getCounterSheets()) {
 
-            String counterSheetFrontPath = workingDir + "/" + counterSheet.getFrontImageFile()
+            String counterSheetFrontPath = workingDir + File.separator + counterSheet.getFrontImageFile()
             String frontSheetFileExt = counterSheetFrontPath.substring(counterSheetFrontPath.lastIndexOf(".") + 1)
-            Optional<BufferedImage> frontImage
-            try {
-                frontImage = ImageReaderFactory.getReader(frontSheetFileExt).readImage(new File(counterSheetFrontPath))
-            } catch (IOException e) {
-                throw new RuntimeException(e)
-            }
 
-            if (frontImage.isPresent()) {
-
-                int sectionIndex = 0
-                for (CounterSection counterSection : counterSheet.getCounterSections()) {
-                    int dpi = counterSheet.getDpi()
-                    int totalCounters = counterSection.getColumns() * counterSection.getRows()
-
-                    for (int counterIndex = 0; counterIndex < totalCounters; counterIndex++) {
-                        int column = counterIndex % counterSection.getColumns()
-                        int row = (int) (counterIndex / counterSection.getColumns())
-
-                        Counter counter = new Counter()
-
-                        BufferedImage counterFrontImage = frontImage.get().getSubimage(
-                                (int) (dpi * (counterSection.getX() + (counterSection.getCounterSize() * column))),
-                                (int) (dpi * (counterSection.getY() + (counterSection.getCounterSize() * row))),
-                                (int) (dpi * counterSection.getCounterSize()),
-                                (int) (dpi * counterSection.getCounterSize())
-                        )
-
-                        counter.setName("Sheet" + counterSheetIndex +
-                                "_Section" + (sectionIndex + 1) +
-                                "_Counter" + (counterIndex + 1))
-
-                        counter.setFrontImage(counterFrontImage)
-
-                        counters.add(counter)
-                    }
-
-                    sectionIndex++
-                }
-            } else {
-                throw new RuntimeException(String.format("Front image file not found in file [%s]", counterSheetFrontPath))
-            }
-
-            /*String counterSheetBackPath = workingDir + "/" + counterSheet.getBackImageFile()
+            String counterSheetBackPath = workingDir + File.separator + counterSheet.getBackImageFile()
             String backSheetFileExt = counterSheetBackPath.substring(counterSheetBackPath.lastIndexOf(".") + 1)
+
+            Optional<BufferedImage> frontImage
             Optional<BufferedImage> backImage
             try {
+                frontImage = ImageReaderFactory.getReader(frontSheetFileExt).readImage(new File(counterSheetFrontPath))
                 backImage = ImageReaderFactory.getReader(backSheetFileExt).readImage(new File(counterSheetBackPath))
             } catch (IOException e) {
                 throw new RuntimeException(e)
             }
 
-            if (backImage.isPresent()) {
+            int sectionIndex = 0
+            for (CounterSection counterSection : counterSheet.getCounterSections()) {
+                int dpi = counterSheet.getDpi()
+                int totalCounters = counterSection.getColumns() * counterSection.getRows()
+                double sheetWidth = counterSheet.getWidth()
 
-                int sectionIndex = 0
-                for (CounterSection counterSection : counterSheet.getCounterSections()) {
-                    int dpi = counterSheet.getDpi()
-                    int totalCounters = counterSection.getColumns() * counterSection.getRows()
+                for (int counterIndex = 0; counterIndex < totalCounters; counterIndex++) {
+                    int column = counterIndex % counterSection.getColumns()
+                    int row = (int) (counterIndex / counterSection.getColumns())
 
-                    for (int counterIndex = 0; counterIndex < totalCounters; counterIndex++) {
-                        int column = counterIndex % counterSection.getColumns()
-                        int row = counterIndex / counterSection.getColumns()
+                    Counter counter = new Counter()
 
-                        Counter counter = new Counter()
+                    counter.setName("Sheet" + counterSheetIndex + "_Section" + (sectionIndex + 1) + "_Counter" + (counterIndex + 1))
 
-                        BufferedImage counterBackImage = backImage.get().getSubimage(
-                            (int) (dpi * (counterSection.getX() + (counterSection.getCounterSize() * column))),
-                            (int) (dpi * (counterSection.getY() + (counterSection.getCounterSize() * row))),
-                            (int) (dpi * counterSection.getCounterSize()),
-                            (int) (dpi * counterSection.getCounterSize())
+                    BufferedImage frontCounterImage
+                    if (frontImage.isPresent()) {
+                        frontCounterImage = frontImage.get().getSubimage(
+                                (int) (dpi * (counterSection.getX() + (counterSection.getCounterSize() * column))),
+                                (int) (dpi * (counterSection.getY() + (counterSection.getCounterSize() * row))),
+                                (int) (dpi * counterSection.getCounterSize()),
+                                (int) (dpi * counterSection.getCounterSize())
                         )
-
-                        counter.setName("Sheet" + counterSheetIndex +
-                            "_Section" + (sectionIndex + 1) +
-                            "_Counter" + (counterIndex + 1))
-
-                        if (counterSheet.getCornerRounding() != 0.0) {
-                            int cornerRoundingPixels = (int) (dpi * counterSheet.getCornerRounding())
-                            counter.setBackImage(makeRoundedCorner(counterBackImage, cornerRoundingPixels))
-                        } else {
-                            counter.setBackImage(counterBackImage)
-                        }
-
-                        counters.add(counter)
+                        counter.setFrontImage(frontCounterImage)
+                    } else {
+                        throw new RuntimeException(String.format("Front image file not found in file [%s]", counterSheetFrontPath))
                     }
 
-                    sectionIndex++
+                    BufferedImage backCounterImage
+                    if (backImage.isPresent()) {
+                        backCounterImage = backImage.get().getSubimage(
+                                (int) (dpi * (sheetWidth - (counterSection.getX() + (counterSection.getCounterSize() * (column + 1))))),
+                                (int) (dpi * (counterSection.getY() + (counterSection.getCounterSize() * row))),
+                                (int) (dpi * counterSection.getCounterSize()),
+                                (int) (dpi * counterSection.getCounterSize())
+                        )
+                        counter.setBackImage(backCounterImage)
+                    } else {
+                        throw new RuntimeException(String.format("Back image file not found in file [%s]", counterSheetBackPath))
+                    }
+
+                    counters.add(counter)
                 }
-            } else {
-                throw new RuntimeException(String.format("Back image file not found in file [%s]", counterSheetBackPath))
-            }*/
+
+                sectionIndex++
+            }
 
             counterSheetIndex++
         }

@@ -3,6 +3,7 @@ package net.schwissig
 import net.schwissig.model.Counter
 
 import javax.imageio.ImageIO
+import java.awt.image.RenderedImage
 
 class CounterWriter {
 
@@ -17,19 +18,23 @@ class CounterWriter {
 
     void write() {
         for (Counter counter : counters) {
-            File frontImage = new File(outputPath, counter.getName() + "_front.png")
-            try {
-                ImageIO.write(counter.getFrontImage(), "png", frontImage)
-            } catch (IOException e) {
-                throw new RuntimeException(e)
+            if (counter.getFrontImage()) {
+                File frontImage = new File(outputPath, counter.getName() + "_front.png")
+                writeImageFile(frontImage, counter.getFrontImage())
             }
 
-            /*File backImage = new File(outputPath + counter.getName() + "_back.png")
-            try {
-                ImageIO.write(counter.getBackImage(), "png", backImage)
-            } catch (IOException e) {
-                throw new RuntimeException(e)
-            }*/
+            if (counter.getBackImage()) {
+                File backImageFile = new File(outputPath, counter.getName() + "_back.png")
+                writeImageFile(backImageFile, counter.getBackImage())
+            }
+        }
+    }
+
+    private static void writeImageFile(File fileToWrite, RenderedImage imageToWrite) {
+        try {
+            ImageIO.write(imageToWrite, "png", fileToWrite)
+        } catch (IOException e) {
+            throw new RuntimeException(e)
         }
     }
 }

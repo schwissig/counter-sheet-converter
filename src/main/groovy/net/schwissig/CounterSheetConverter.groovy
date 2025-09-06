@@ -4,6 +4,7 @@ import com.google.gson.Gson
 import net.schwissig.model.Counter
 import net.schwissig.model.CounterSheet
 import net.schwissig.model.CounterSheetData
+import net.schwissig.processing.ImageRounder
 import net.schwissig.reader.CounterSheetReader
 
 /**
@@ -14,6 +15,7 @@ class CounterSheetConverter {
     static void convert(String counterSheetDirPath, String counterOutputPath) throws FileNotFoundException {
         File jsonFile = new File(counterSheetDirPath)
 
+        // Read the JSON metadata file.
         CounterSheetData counterSheetData = new Gson().fromJson(new FileReader(jsonFile), CounterSheetData.class)
 
         // Process counter per sheet.
