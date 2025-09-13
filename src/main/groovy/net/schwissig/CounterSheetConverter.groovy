@@ -29,18 +29,16 @@ class CounterSheetConverter {
 
             for (Counter counter : counters) {
                 if (counter.getFrontImage()) {
-                    if (pixelShadingDepth > 0) {
-                        // Process counter highlighting and shadow effect.
-                        counter.setFrontImage(ImageEdgeHighlighter.process(pixelShadingDepth, counter.getFrontImage()))
-                    }
+                    // Process counter highlighting and shadow effect.
+                    counter.setFrontImage(ImageEdgeHighlighter.process(pixelShadingDepth, counter.getFrontImage()))
+
                     // Process counter corner rounding.
                     counter.setFrontImage(ImageRounder.process(pixelsToRound, counter.getFrontImage()))
                 }
                 if (counter.getBackImage()) {
-                    if (pixelShadingDepth > 0) {
-                        // Process counter highlighting and shadow effect.
-                        counter.setBackImage(ImageEdgeHighlighter.process(pixelShadingDepth, counter.getBackImage()))
-                    }
+                    // Process counter highlighting and shadow effect.
+                    counter.setBackImage(ImageEdgeHighlighter.process(pixelShadingDepth, counter.getBackImage()))
+
                     // Process counter corner rounding.
                     counter.setBackImage(ImageRounder.process(pixelsToRound, counter.getBackImage()))
                 }
