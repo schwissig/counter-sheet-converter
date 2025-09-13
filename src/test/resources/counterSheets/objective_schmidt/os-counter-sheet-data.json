@@ -1,11 +1,12 @@
 {
   "cornerRounding": 0.08,
+  "shadingDepth": 0.017,
   "counterSheets": [
     {
       "name": "OS - German Counters",
       "frontImageFile": "OS-German-Countersheet-front.pdf",
       "backImageFile": "OS-German-Countersheet-back.pdf",
-      "width": 8.469,
+      "width": 8.48,
       "height": 11,
       "dpi": 600,
       "counterSections": [

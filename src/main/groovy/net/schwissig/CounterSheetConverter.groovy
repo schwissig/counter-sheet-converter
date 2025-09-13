@@ -4,6 +4,7 @@ import com.google.gson.Gson
 import net.schwissig.model.Counter
 import net.schwissig.model.CounterSheet
 import net.schwissig.model.CounterSheetData
+import net.schwissig.processing.ImageEdgeHighlighter
 import net.schwissig.processing.ImageRounder
 import net.schwissig.reader.CounterSheetReader
 
@@ -23,20 +24,27 @@ class CounterSheetConverter {
             // Read counters from counter sheet.
             List<Counter> counters = new CounterSheetReader(jsonFile.getParent(), counterSheetData, null).read()
 
-            // Manipulate counters
+            int pixelShadingDepth = (int) (counterSheetData.getShadingDepth() * counterSheet.getDpi())
             int pixelsToRound = (int) (counterSheetData.getCornerRounding() * counterSheet.getDpi())
-            if (pixelsToRound > 0) {
-                for (Counter counter : counters) {
-                    if (counter.getFrontImage()) {
-                        counter.setFrontImage(ImageRounder.process(pixelsToRound, counter.getFrontImage()))
+
+            for (Counter counter : counters) {
+                if (counter.getFrontImage()) {
+                    if (pixelShadingDepth > 0) {
+                        // Process counter highlighting and shadow effect.
+                        counter.setFrontImage(ImageEdgeHighlighter.process(pixelShadingDepth, counter.getFrontImage()))
                     }
-                    if (counter.getBackImage()) {
-                        counter.setBackImage(ImageRounder.process(pixelsToRound, counter.getBackImage()))
+                    // Process counter corner rounding.
+                    counter.setFrontImage(ImageRounder.process(pixelsToRound, counter.getFrontImage()))
+                }
+                if (counter.getBackImage()) {
+                    if (pixelShadingDepth > 0) {
+                        // Process counter highlighting and shadow effect.
+                        counter.setBackImage(ImageEdgeHighlighter.process(pixelShadingDepth, counter.getBackImage()))
                     }
+                    // Process counter corner rounding.
+                    counter.setBackImage(ImageRounder.process(pixelsToRound, counter.getBackImage()))
                 }
             }
-
-
 
             // Write counters to files.
             new CounterWriter(counterOutputPath, counters).write()
