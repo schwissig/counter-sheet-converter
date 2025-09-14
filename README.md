@@ -6,3 +6,7 @@ This app is used to convert a counter sheet image into the individual counter im
 2. Verify you can run Java by opening a Terminal/PowerShell window and typing the command "java".
 3. Enter the command to run the program, with given inputs: ```java -Xms6g -jar counter-sheet-converter-<version>-all.jar <data-file.json> <output-directory>```
 
+## Change Log
+
+### 1.0.1
+1. Added highlighting ability for counters using the top-level "highlightingDepth" variable, set to a depth of inches.
