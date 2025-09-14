@@ -4,7 +4,7 @@ class CounterSheetData {
 
     Double cornerRounding
 
-    Double shadingDepth
+    Double highlightingDepth
 
     List<CounterSheet> counterSheets
 }
