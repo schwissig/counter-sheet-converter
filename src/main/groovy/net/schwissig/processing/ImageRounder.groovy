@@ -3,9 +3,11 @@ package net.schwissig.processing
 import java.awt.AlphaComposite
 import java.awt.Color
 import java.awt.Graphics2D
-import java.awt.RenderingHints
 import java.awt.geom.RoundRectangle2D
 import java.awt.image.BufferedImage
+
+import static java.awt.RenderingHints.KEY_ANTIALIASING
+import static java.awt.RenderingHints.VALUE_ANTIALIAS_ON
 
 class ImageRounder {
 
@@ -17,7 +19,7 @@ class ImageRounder {
      * @return Image with corners potentially rounded, based on inputs.
      */
     static BufferedImage process(int pixelsToRound, BufferedImage image) {
-        if (pixelsToRound > 0) {
+        if (pixelsToRound && pixelsToRound > 0) {
             return makeRoundedCorner(image, pixelsToRound)
         } else {
             return image
@@ -29,24 +31,17 @@ class ImageRounder {
         int h = image.getHeight()
         BufferedImage output = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB)
 
-        Graphics2D g2 = output.createGraphics()
+        Graphics2D sheetGraphics = output.createGraphics()
 
-        // This is what we want, but it only does hard-clipping, i.e. aliasing
-        // g2.setClip(new RoundRectangle2D ...)
+        sheetGraphics.setComposite(AlphaComposite.Src)
+        sheetGraphics.setRenderingHint(KEY_ANTIALIASING, VALUE_ANTIALIAS_ON)
+        sheetGraphics.setColor(Color.WHITE)
+        sheetGraphics.fill(new RoundRectangle2D.Float(0, 0, w, h, cornerRadius, cornerRadius))
 
-        // so instead fake soft-clipping by first drawing the desired clip shape
-        // in fully opaque white with antialiasing enabled...
-        g2.setComposite(AlphaComposite.Src)
-        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON)
-        g2.setColor(Color.WHITE)
-        g2.fill(new RoundRectangle2D.Float(0, 0, w, h, cornerRadius, cornerRadius))
+        sheetGraphics.setComposite(AlphaComposite.SrcAtop)
+        sheetGraphics.drawImage(image, 0, 0, null)
 
-        // ... then compositing the image on top,
-        // using the white shape from above as alpha source
-        g2.setComposite(AlphaComposite.SrcAtop)
-        g2.drawImage(image, 0, 0, null)
-
-        g2.dispose()
+        sheetGraphics.dispose()
 
         return output
     }

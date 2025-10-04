@@ -2,7 +2,9 @@ package net.schwissig.model
 
 class CounterSheetData {
 
-    double cornerRounding
+    Double cornerRounding
+
+    Double highlightingDepth
 
     List<CounterSheet> counterSheets
 }

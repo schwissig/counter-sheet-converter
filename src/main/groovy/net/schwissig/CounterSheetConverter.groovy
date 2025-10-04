@@ -4,6 +4,7 @@ import com.google.gson.Gson
 import net.schwissig.model.Counter
 import net.schwissig.model.CounterSheet
 import net.schwissig.model.CounterSheetData
+import net.schwissig.processing.ImageEdgeHighlighter
 import net.schwissig.processing.ImageRounder
 import net.schwissig.reader.CounterSheetReader
 
@@ -23,16 +24,27 @@ class CounterSheetConverter {
             // Read counters from counter sheet.
             List<Counter> counters = new CounterSheetReader(jsonFile.getParent(), counterSheetData, null).read()
 
-            // Manipulate counters
-            int pixelsToRound = (int) (counterSheetData.getCornerRounding() * counterSheet.getDpi())
-            if (pixelsToRound > 0) {
-                for (Counter counter : counters) {
-                    if (counter.getFrontImage()) {
-                        counter.setFrontImage(ImageRounder.process(pixelsToRound, counter.getFrontImage()))
-                    }
-                    if (counter.getBackImage()) {
-                        counter.setBackImage(ImageRounder.process(pixelsToRound, counter.getBackImage()))
-                    }
+            int pixelHighlightingDepth = counterSheetData.getHighlightingDepth() ?
+                    (int) (counterSheetData.getHighlightingDepth() * counterSheet.getDpi()) :
+                    0
+            int pixelsToRound = counterSheetData.getCornerRounding() ?
+                    (int) (counterSheetData.getCornerRounding() * counterSheet.getDpi()) :
+                    0
+
+            for (Counter counter : counters) {
+                if (counter.getFrontImage()) {
+                    // Process counter highlighting and shadow effect.
+                    counter.setFrontImage(ImageEdgeHighlighter.process(pixelHighlightingDepth, counter.getFrontImage()))
+
+                    // Process counter corner rounding.
+                    counter.setFrontImage(ImageRounder.process(pixelsToRound, counter.getFrontImage()))
+                }
+                if (counter.getBackImage()) {
+                    // Process counter highlighting and shadow effect.
+                    counter.setBackImage(ImageEdgeHighlighter.process(pixelHighlightingDepth, counter.getBackImage()))
+
+                    // Process counter corner rounding.
+                    counter.setBackImage(ImageRounder.process(pixelsToRound, counter.getBackImage()))
                 }
             }
 

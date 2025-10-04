@@ -1,28 +1,57 @@
 package net.schwissig.processing
 
-import java.awt.Color
-import java.awt.Graphics2D
-import java.awt.RenderingHints
+import java.awt.*
 import java.awt.image.BufferedImage
 
 class ImageEdgeHighlighter {
 
     static BufferedImage process(int pixelsToHighlight, BufferedImage image) {
-        Graphics2D sheetGraphics = image.createGraphics()
+        if (pixelsToHighlight && pixelsToHighlight > 0) {
+            int width = image.getWidth()
+            int height = image.getHeight()
 
-        sheetGraphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON)
-        sheetGraphics.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY)
+            Graphics2D sheetGraphics = image.createGraphics()
 
-        int width = image.getWidth()
-        int height = image.getHeight()
+            sheetGraphics.setStroke(new BasicStroke(1))
+            for (int i = 0; i < pixelsToHighlight; i++) {
+                int alpha = 255 - (int) ((i / pixelsToHighlight) * 255)
 
-        for (int i=0; i < pixelsToHighlight; i++) {
-            int alpha = (int) (i / pixelsToHighlight * 255)
+                Color lightHighlightColor = new Color(255, 255, 255, alpha)
+                sheetGraphics.setColor(lightHighlightColor)
+                sheetGraphics.drawLine(
+                        0 + i,
+                        0 + i,
+                        0 + i,
+                        height - i
+                )
+                sheetGraphics.drawLine(
+                    0 + i,
+                    0 + i,
+                    width - i,
+                    0 + i
+                )
 
-            Color darkHighlightColor = new Color(255, 255, 255, alpha)
-            Color lightHighlightColor = new Color(0, 0, 0, alpha)
+                Color darkHighlightColor = new Color(0, 0, 0, alpha)
+                sheetGraphics.setColor(darkHighlightColor)
+                sheetGraphics.drawLine(
+                        width - i,
+                        0 + i,
+                        width - i,
+                        height - i
+                )
+                sheetGraphics.drawLine(
+                        0 + i,
+                        height - i,
+                        width - i,
+                        height - i
+                )
+            }
 
-            
+            sheetGraphics.dispose()
+
+            return image
+        } else {
+            return image
         }
     }
 }
