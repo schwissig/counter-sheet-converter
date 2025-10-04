@@ -5,12 +5,12 @@
       "name": "OS - German Counters",
       "frontImageFile": "OS-German-Countersheet-front.pdf",
       "backImageFile": "OS-German-Countersheet-back.pdf",
-      "width": 8.469,
-      "height": 11,
+      "width": 8.465,
+      "height": 10.58,
       "dpi": 600,
       "counterSections": [
         {
-          "x": 0.48167,
+          "x": 0.4817,
           "y": 0.615,
           "counterSize": 0.5,
           "columns": 7,
@@ -24,7 +24,7 @@
           "rows": 2
         },
         {
-          "x": 0.48167,
+          "x": 0.4817,
           "y": 1.865,
           "counterSize": 0.5,
           "columns": 7,
@@ -38,7 +38,7 @@
           "rows": 2
         },
         {
-          "x": 0.48167,
+          "x": 0.4817,
           "y": 3.115,
           "counterSize": 0.5,
           "columns": 7,
@@ -52,7 +52,7 @@
           "rows": 2
         },
         {
-          "x": 0.48167,
+          "x": 0.4817,
           "y": 4.365,
           "counterSize": 0.5,
           "columns": 7,
@@ -66,7 +66,7 @@
           "rows": 2
         },
         {
-          "x": 0.48167,
+          "x": 0.4817,
           "y": 5.615,
           "counterSize": 0.5,
           "columns": 7,
@@ -80,7 +80,7 @@
           "rows": 2
         },
         {
-          "x": 0.48167,
+          "x": 0.4817,
           "y": 6.865,
           "counterSize": 0.5,
           "columns": 7,
@@ -94,7 +94,7 @@
           "rows": 2
         },
         {
-          "x": 0.48167,
+          "x": 0.4817,
           "y": 8.115,
           "counterSize": 0.5,
           "columns": 7,
@@ -108,7 +108,7 @@
           "rows": 2
         },
         {
-          "x": 0.48167,
+          "x": 0.4817,
           "y": 9.365,
           "counterSize": 0.5,
           "columns": 7,
@@ -127,12 +127,12 @@
       "name": "OS - US Counters",
       "frontImageFile": "OS-US-Countersheet-front.pdf",
       "backImageFile": "OS-US-Countersheet-back.pdf",
-      "width": 8.469,
+      "width": 8.465,
       "height": 11,
       "dpi": 600,
       "counterSections": [
         {
-          "x": 0.48167,
+          "x": 0.4817,
           "y": 0.615,
           "counterSize": 0.5,
           "columns": 7,
@@ -146,7 +146,7 @@
           "rows": 2
         },
         {
-          "x": 0.48167,
+          "x": 0.4817,
           "y": 1.865,
           "counterSize": 0.5,
           "columns": 7,
@@ -160,7 +160,7 @@
           "rows": 2
         },
         {
-          "x": 0.48167,
+          "x": 0.4817,
           "y": 3.115,
           "counterSize": 0.5,
           "columns": 7,
@@ -174,7 +174,7 @@
           "rows": 2
         },
         {
-          "x": 0.48167,
+          "x": 0.4817,
           "y": 4.365,
           "counterSize": 0.5,
           "columns": 7,
@@ -188,7 +188,7 @@
           "rows": 2
         },
         {
-          "x": 0.48167,
+          "x": 0.4817,
           "y": 5.615,
           "counterSize": 0.5,
           "columns": 7,
@@ -202,7 +202,7 @@
           "rows": 2
         },
         {
-          "x": 0.48167,
+          "x": 0.4817,
           "y": 6.865,
           "counterSize": 0.5,
           "columns": 7,
@@ -216,7 +216,7 @@
           "rows": 2
         },
         {
-          "x": 0.48167,
+          "x": 0.4817,
           "y": 8.115,
           "counterSize": 0.5,
           "columns": 7,
@@ -230,7 +230,7 @@
           "rows": 2
         },
         {
-          "x": 0.48167,
+          "x": 0.4817,
           "y": 9.365,
           "counterSize": 0.5,
           "columns": 7,

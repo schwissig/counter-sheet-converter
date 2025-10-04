@@ -30,6 +30,6 @@ class CounterSheetConverterSpec extends Specification {
 
         then:
         FileNotFoundException exception = thrown(FileNotFoundException.class)
-        exception.getMessage().contains(jsonDataFile)
+        exception.getMessage().contains("asdf.json")
     }
 }
