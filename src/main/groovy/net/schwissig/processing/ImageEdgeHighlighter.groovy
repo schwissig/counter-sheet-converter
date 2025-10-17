@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage
 
 class ImageEdgeHighlighter {
 
-    static BufferedImage process(int pixelsToHighlight, BufferedImage image) {
+    static BufferedImage process(int pixelsToHighlight, double highlightingStrength, BufferedImage image) {
         if (pixelsToHighlight && pixelsToHighlight > 0) {
             int width = image.getWidth()
             int height = image.getHeight()
@@ -14,7 +14,7 @@ class ImageEdgeHighlighter {
 
             sheetGraphics.setStroke(new BasicStroke(1))
             for (int i = 0; i < pixelsToHighlight; i++) {
-                int alpha = 255 - (int) ((i / pixelsToHighlight) * 255)
+                int alpha = (int) ((255 - ((i / pixelsToHighlight) * 255)) * highlightingStrength)
 
                 Color lightHighlightColor = new Color(255, 255, 255, alpha)
                 sheetGraphics.setColor(lightHighlightColor)

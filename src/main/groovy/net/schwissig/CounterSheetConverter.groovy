@@ -27,6 +27,7 @@ class CounterSheetConverter {
             int pixelHighlightingDepth = counterSheetData.getHighlightingDepth() ?
                     (int) (counterSheetData.getHighlightingDepth() * counterSheet.getDpi()) :
                     0
+            double highlightingStrength = counterSheetData.getHighlightingStrength() ?: 1.0
             int pixelsToRound = counterSheetData.getCornerRounding() ?
                     (int) (counterSheetData.getCornerRounding() * counterSheet.getDpi()) :
                     0
@@ -34,14 +35,14 @@ class CounterSheetConverter {
             for (Counter counter : counters) {
                 if (counter.getFrontImage()) {
                     // Process counter highlighting and shadow effect.
-                    counter.setFrontImage(ImageEdgeHighlighter.process(pixelHighlightingDepth, counter.getFrontImage()))
+                    counter.setFrontImage(ImageEdgeHighlighter.process(pixelHighlightingDepth, highlightingStrength, counter.getFrontImage()))
 
                     // Process counter corner rounding.
                     counter.setFrontImage(ImageRounder.process(pixelsToRound, counter.getFrontImage()))
                 }
                 if (counter.getBackImage()) {
                     // Process counter highlighting and shadow effect.
-                    counter.setBackImage(ImageEdgeHighlighter.process(pixelHighlightingDepth, counter.getBackImage()))
+                    counter.setBackImage(ImageEdgeHighlighter.process(pixelHighlightingDepth, highlightingStrength, counter.getBackImage()))
 
                     // Process counter corner rounding.
                     counter.setBackImage(ImageRounder.process(pixelsToRound, counter.getBackImage()))

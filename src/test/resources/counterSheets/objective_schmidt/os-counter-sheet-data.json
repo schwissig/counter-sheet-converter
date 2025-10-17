@@ -1,6 +1,7 @@
 {
   "cornerRounding": 0.08,
   "highlightingDepth": 0.017,
+  "highlightingStrength": 0.33,
   "counterSheets": [
     {
       "name": "OS - German Counters",

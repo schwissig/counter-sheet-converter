@@ -6,5 +6,7 @@ class CounterSheetData {
 
     Double highlightingDepth
 
+    Double highlightingStrength
+
     List<CounterSheet> counterSheets
 }
