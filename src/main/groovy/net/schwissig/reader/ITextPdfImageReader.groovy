@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage
 class ITextPdfImageReader implements IImageReader {
 
     @Override
-    public Optional<BufferedImage> readImage(File sourceFile) {
+    public Optional<BufferedImage> readImage(File sourceFile, float dpi, int pageIndex) {
 
         /*new File(dest).getParentFile().mkdirs();
         PdfDocument pdfDoc = new PdfDocument(new PdfReader(IMAGE_TYPES), new PdfWriter(new ByteArrayOutputStream()));
@@ -16,6 +16,11 @@ class ITextPdfImageReader implements IImageReader {
         }
         pdfDoc.close();*/
 
-        return Optional.empty();
+        return Optional.empty()
+    }
+
+    @Override
+    Optional<BufferedImage> readImage(File sourceFile, float dpi) throws IOException {
+        return Optional.empty()
     }
 }

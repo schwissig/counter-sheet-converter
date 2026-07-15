@@ -50,7 +50,7 @@ class CounterSheetConverter {
             }
 
             // Write counters to files.
-            new CounterWriter(counterOutputPath, counters).write()
+            new CounterWriter(counterOutputPath + File.separator + counterSheet.getName(), counters).write()
         }
     }
 }

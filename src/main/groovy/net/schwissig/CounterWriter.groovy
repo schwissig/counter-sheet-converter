@@ -17,6 +17,11 @@ class CounterWriter {
     }
 
     void write() {
+        File outputDirectory = new File(outputPath)
+        if (!outputDirectory.exists()) {
+            outputDirectory.mkdir()
+        }
+
         for (Counter counter : counters) {
             if (counter.getFrontImage()) {
                 File frontImage = new File(outputPath, counter.getName() + "_front.png")

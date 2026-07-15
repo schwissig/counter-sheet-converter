@@ -41,8 +41,16 @@ class CounterSheetReader {
             Optional<BufferedImage> frontImage
             Optional<BufferedImage> backImage
             try {
-                frontImage = ImageReaderFactory.getReader(frontSheetFileExt).readImage(new File(counterSheetFrontPath))
-                backImage = ImageReaderFactory.getReader(backSheetFileExt).readImage(new File(counterSheetBackPath))
+                frontImage = ImageReaderFactory.getReader(frontSheetFileExt).readImage(
+                        new File(counterSheetFrontPath),
+                        counterSheet.getDpi(),
+                        counterSheet.getFrontImagePage() ? counterSheet.getFrontImagePage() - 1 : 0
+                )
+                backImage = ImageReaderFactory.getReader(backSheetFileExt).readImage(
+                        new File(counterSheetBackPath),
+                        counterSheet.getDpi(),
+                        counterSheet.getBackImagePage() ? counterSheet.getBackImagePage() - 1 : 0
+                )
             } catch (IOException e) {
                 throw new RuntimeException(e)
             }

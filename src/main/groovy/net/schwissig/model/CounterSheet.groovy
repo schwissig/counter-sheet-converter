@@ -10,5 +10,7 @@ class CounterSheet {
 
     String frontImageFile, backImageFile
 
+    int frontImagePage, backImagePage
+
     List<CounterSection> counterSections
 }
