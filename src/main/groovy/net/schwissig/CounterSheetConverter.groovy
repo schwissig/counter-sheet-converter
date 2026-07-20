@@ -22,7 +22,7 @@ class CounterSheetConverter {
         // Process counter per sheet.
         for (CounterSheet counterSheet : counterSheetData.getCounterSheets()) {
             // Read counters from counter sheet.
-            List<Counter> counters = new CounterSheetReader(jsonFile.getParent(), counterSheetData, null).read()
+            List<Counter> counters = new CounterSheetReader(jsonFile.getParent(), counterSheet, null).read()
 
             int pixelHighlightingDepth = counterSheetData.getHighlightingDepth() ?
                     (int) (counterSheetData.getHighlightingDepth() * counterSheet.getDpi()) :
