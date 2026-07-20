@@ -10,5 +10,8 @@ Please see the `src/test/resources` directory for an example of the format for a
 
 ## Change Log
 
+### 1.1.0
+1. Added a user interface for easier accessibility.
+
 ### 1.0.1
 1. Added highlighting ability for counters using the top-level "highlightingDepth" variable, set to a depth of inches.
