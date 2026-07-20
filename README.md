@@ -4,7 +4,8 @@ This app is used to convert a counter sheet image into the individual counter im
 ## How to Use
 1. Install Java 17 JRE if it is not installed.
 2. Verify you can run Java by opening a Terminal/PowerShell window and typing the command "java".
-3. Enter the command to run the program, with given inputs: ```java -Xms6g -jar counter-sheet-converter-<version>-all.jar <data-file.json> <output-directory>```
+3. Build the artifact by running the ```shadowJar``` Gradle task.
+4. Enter the command to run the program, with given inputs: ```java -jar build/counter-sheet-converter-<version>-all.jar```
 
 Please see the `src/test/resources` directory for an example of the format for a JSON data file to be used for the program input.
 
