@@ -17,6 +17,9 @@ Please see the `src/test/resources` directory for an example of the format for a
 
 ## Change Log
 
+### 1.1.1
+1. Make sure all counter names are unique, which is a requirement for all images in Vassal modules.
+
 ### 1.1.0
 1. Added a user interface for easier accessibility.
 
