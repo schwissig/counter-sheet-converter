@@ -20,6 +20,7 @@ class CounterSheetConverter {
         CounterSheetData counterSheetData = new Gson().fromJson(new FileReader(jsonFile), CounterSheetData.class)
 
         // Process counter per sheet.
+        int sheetIndex = 1
         for (CounterSheet counterSheet : counterSheetData.getCounterSheets()) {
             // Read counters from counter sheet.
             List<Counter> counters = new CounterSheetReader(jsonFile.getParent(), counterSheet, null).read()
@@ -50,7 +51,8 @@ class CounterSheetConverter {
             }
 
             // Write counters to files.
-            new CounterWriter(counterOutputPath + File.separator + counterSheet.getName(), counters).write()
+            String outputDirectory = counterOutputPath + File.separator + counterSheet.getName()
+            new CounterWriter(outputDirectory, "S" + sheetIndex++, counters).write()
         }
     }
 }
